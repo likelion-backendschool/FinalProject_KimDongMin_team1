@@ -1,6 +1,6 @@
 package com.ll.mutbooks.post.entity;
 
-import com.ll.mutbooks.base.entity.BaseEntity;
+import com.ll.mutbooks.common.entity.BaseEntity;
 import lombok.*;
 
 import javax.persistence.*;
