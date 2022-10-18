@@ -29,13 +29,13 @@ public class MemberController {
     @GetMapping("/join")
     public String memberJoinForm(Model model) {
         model.addAttribute("memberJoinFormDto", new MemberJoinFormDto());
-        return "member/member_join_form";
+        return "member/signup_form";
     }
 
     @PostMapping("/join")
     public String memberJoin(@Valid MemberJoinFormDto memberJoinFormDto, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            return "member/member_join_form";
+            return "member/signup_form";
         }
 
         try {
@@ -44,7 +44,7 @@ public class MemberController {
             mailService.sendMail(member.getEmail());
         } catch (IllegalStateException | MessagingException e) {
             model.addAttribute("errorMessage", e.getMessage());
-            return "member/member_join_form";
+            return "member/signup_form";
         }
 
         return "redirect:/";
@@ -53,6 +53,6 @@ public class MemberController {
     @GetMapping("/login")
     public String memberLoginForm(Model model) {
         model.addAttribute("memberLoginFormDto", new MemberLoginFormDto());
-        return "member/member_login_form";
+        return "member/login_form";
     }
 }
