@@ -4,4 +4,7 @@ import com.ll.mutbooks.member.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface MemberRepository extends JpaRepository<Member, Long> {
+
+    // 회원가입 시 중복된 회원을 검사하기 위한 메서드
+    Member findByEmail(String email);
 }
