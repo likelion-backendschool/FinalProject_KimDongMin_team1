@@ -1,4 +1,4 @@
-package com.ll.mutbooks.member.entity;
+package com.ll.mutbooks.member.dto;
 
 import lombok.*;
 import org.hibernate.validator.constraints.Length;
