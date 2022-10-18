@@ -26,17 +26,20 @@
 <body style="min-height:100vh;" class="d-flex flex-column">
 
 <!-- 네비게이션바 -->
-<header style="margin: 0 auto;">
-    <div class="container">
-        <a href="/">메인</a>
-        <a href="/member/login">로그인</a>
-        <a href="/member/join">회원가입</a>
+<header class="d-flex justify-content-between p-3">
+    <p>MUTBOOKS</p>
+    <div class="container" style="text-align: right;">
+        <a th:href="@{/}">메인</a>
+        <a th:href="@{/member/login}">로그인</a>
+        <a th:href="@{/member/join}">회원가입</a>
     </div>
 </header>
 
-<section layout:fragment="content">
-    <div>내용</div>
-</section>
+<main class="flex-grow-1">
+    <section layout:fragment="content" class="container">
+        <div>내용</div>
+    </section>
+</main>
 
 <footer class="bg-dark text-light">
     <div class="container py-3 d-flex justify-content-center">

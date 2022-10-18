@@ -12,7 +12,7 @@
     </style>
 </head>
 <section layout:fragment="content" class="w-25" style="margin: 0 auto;">
-    <form action="/member/join" role="form" method="post" th:object="${memberFormDto}">
+    <form action="/member/join" role="form" method="post" th:object="${memberJoinFormDto}">
         <div class="form-group py-2">
             <label th:for="username">아이디</label>
             <input type="text" th:field="*{username}" class="form-control" placeholder="아이디를 입력해주세요.">

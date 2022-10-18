@@ -11,9 +11,9 @@ import javax.validation.constraints.NotEmpty;
 @AllArgsConstructor
 @Getter @Setter
 @Builder
-public class MemberFormDto {
+public class MemberJoinFormDto {
 
-    @NotBlank(message = "이름은 필수 입력 값입니다.")
+    @NotBlank(message = "아이디는 필수 입력 값입니다.")
     private String username;
 
     @NotEmpty(message = "비밀번호는 필수 입력 값입니다.")
