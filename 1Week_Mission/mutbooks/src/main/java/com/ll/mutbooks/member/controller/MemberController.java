@@ -1,5 +1,6 @@
 package com.ll.mutbooks.member.controller;
 
+import com.ll.mutbooks.common.service.MailService;
 import com.ll.mutbooks.member.entity.Member;
 import com.ll.mutbooks.member.entity.MemberFormDto;
 import com.ll.mutbooks.member.service.MemberService;
@@ -11,7 +12,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.mail.MessagingException;
 import javax.validation.Valid;
 
 @Controller
@@ -20,6 +23,7 @@ import javax.validation.Valid;
 public class MemberController {
 
     private final MemberService memberService;
+    private final MailService mailService;
     private final PasswordEncoder passwordEncoder;
 
     @GetMapping("/join")
@@ -37,9 +41,9 @@ public class MemberController {
         try {
             Member member = Member.createMember(memberFormDto, passwordEncoder);
             memberService.joinMember(member);
-        } catch (IllegalStateException e) {
+            mailService.sendMail(member.getEmail());
+        } catch (IllegalStateException | MessagingException e) {
             model.addAttribute("errorMessage", e.getMessage());
-            e.printStackTrace();
             return "member/member_join_form";
         }
 
