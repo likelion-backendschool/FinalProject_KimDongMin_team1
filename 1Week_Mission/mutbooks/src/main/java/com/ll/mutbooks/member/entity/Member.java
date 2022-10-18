@@ -1,6 +1,7 @@
 package com.ll.mutbooks.member.entity;
 
 import com.ll.mutbooks.common.entity.BaseEntity;
+import com.ll.mutbooks.member.dto.MemberJoinFormDto;
 import lombok.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -17,24 +18,24 @@ public class Member extends BaseEntity {
     @Column(name = "member_id")
     private Long id;
 
-    @Column(name = "member_username")
+    @Column(name = "member_username", unique = true)
     private String username;
 
     @Column(name = "member_password")
     private String password;
 
-    @Column(name = "member_nickname")
+    @Column(name = "member_nickname", unique = true)
     private String nickname;
 
-    @Column(name = "member_email")
+    @Column(name = "member_email", unique = true)
     private String email;
 
     @Column(name = "member_auth_level")
     @Enumerated(EnumType.STRING)
-    private AuthLevel authLevel;
+    private MemberRole authLevel;
 
     @Builder
-    public Member(String username, String password, String nickname, String email, AuthLevel authLevel) {
+    public Member(String username, String password, String nickname, String email, MemberRole authLevel) {
         this.username = username;
         this.password = password;
         this.nickname = nickname;
@@ -42,13 +43,13 @@ public class Member extends BaseEntity {
         this.authLevel = authLevel;
     }
 
-    public static Member createMember(MemberFormDto memberFormDto, PasswordEncoder passwordEncoder) {
+    public static Member createMember(MemberJoinFormDto memberFormDto, PasswordEncoder passwordEncoder) {
         return Member.builder()
                 .username(memberFormDto.getUsername())
                 .password(passwordEncoder.encode(memberFormDto.getPassword()))
                 .nickname(memberFormDto.getNickname())
                 .email(memberFormDto.getEmail())
-                .authLevel(memberFormDto.getNickname().equals("") ? AuthLevel.NORMAL : AuthLevel.AUTHOR)
+                .authLevel(MemberRole.USER)
                 .build();
     }
 

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 @Service
-@Transactional
 @RequiredArgsConstructor
 public class MemberService {
 
@@ -17,6 +16,7 @@ public class MemberService {
         validateDuplicateMember(member);
         return memberRepository.save(member);
     }
+
 
     // 중복 회원 검사
     private void validateDuplicateMember(Member member) {
