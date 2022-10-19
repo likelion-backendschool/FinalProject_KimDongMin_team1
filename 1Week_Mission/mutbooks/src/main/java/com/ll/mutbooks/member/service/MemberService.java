@@ -21,6 +21,11 @@ public class MemberService {
         return memberRepository.findByUsername(username).orElse(null);
     }
 
+    @Transactional
+    public int modifyPassword(String username, String newPassword) {
+        return memberRepository.modifyPassword(username, newPassword);
+    }
+
     // 중복 회원 검사
     private void validateDuplicateMember(Member member) {
         Member findMember = memberRepository.findByEmail(member.getEmail());
