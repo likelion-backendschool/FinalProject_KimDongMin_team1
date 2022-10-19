@@ -33,4 +33,12 @@ public class PostHashTag extends BaseEntity {
     @JoinColumn(name = "post_keyword_id")
     private PostKeyword postKeyword;
 
+    public static PostHashTag createPostHashTag(Member member, Post post, PostKeyword postKeyword) {
+        return PostHashTag.builder()
+                .member(member)
+                .post(post)
+                .postKeyword(postKeyword)
+                .build();
+    }
+
 }
