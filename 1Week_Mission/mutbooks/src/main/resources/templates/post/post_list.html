@@ -1,0 +1,26 @@
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout.html}">
+<head>
+  <title>글 목록</title>
+</head>
+<section layout:fragment="content" style="margin: 0 auto;">
+  <table class="table table-dark table-hover">
+    <tr>
+      <th>#</th>
+      <th>제목</th>
+      <th>작성자</th>
+      <th>작성일</th>
+      <th>수정일</th>
+    </tr>
+    <tr th:each="post : ${posts}">
+      <td th:text="${post.id}"></td>
+      <td th:text="${post.subject}"></td>
+      <td th:text="${post.member.username}"></td>
+      <td th:text="${post.createDate}"></td>
+      <td th:text="${post.updateDate}"></td>
+    </tr>
+  </table>
+</section>
+</html>

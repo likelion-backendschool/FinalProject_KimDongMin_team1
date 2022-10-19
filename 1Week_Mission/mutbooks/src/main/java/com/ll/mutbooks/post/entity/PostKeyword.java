@@ -20,4 +20,10 @@ public class PostKeyword extends BaseEntity {
 
     @Column(name = "post_keyword_content")
     private String content;
+
+    public static PostKeyword createPostKeyword(String keywords) {
+        return PostKeyword.builder()
+                .content(keywords)
+                .build();
+    }
 }
