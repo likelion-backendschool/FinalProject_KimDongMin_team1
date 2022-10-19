@@ -17,6 +17,9 @@ public class MemberService {
         return memberRepository.save(member);
     }
 
+    public Member findByUsername(String username) {
+        return memberRepository.findByUsername(username).orElse(null);
+    }
 
     // 중복 회원 검사
     private void validateDuplicateMember(Member member) {
