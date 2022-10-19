@@ -2,6 +2,7 @@ package com.ll.mutbooks.member.entity;
 
 import com.ll.mutbooks.common.entity.BaseEntity;
 import com.ll.mutbooks.member.dto.MemberJoinFormDto;
+import com.ll.mutbooks.member.dto.MemberModifyFormDto;
 import lombok.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -41,6 +42,11 @@ public class Member extends BaseEntity {
         this.nickname = nickname;
         this.email = email;
         this.authLevel = authLevel;
+    }
+
+    public void change(MemberModifyFormDto memberModifyFormDto) {
+        this.email = memberModifyFormDto.getEmail();
+        this.nickname = memberModifyFormDto.getNickname();
     }
 
     public static Member createMember(MemberJoinFormDto memberFormDto, PasswordEncoder passwordEncoder) {

@@ -25,12 +25,12 @@
     <title>MUTBOOKS</title>
 </head>
 <body style="min-height:100vh;" class="d-flex flex-column">
-
-<!-- 네비게이션바 -->
 <header class="d-flex justify-content-between p-3">
-    <p>MUTBOOKS</p>
+    <p><a th:href="@{/}" style="color: inherit; text-decoration: none;">MUTBOOKS</a></p>
     <div class="container" style="text-align: right;">
-        <a th:href="@{/}">메인</a>
+        <span sec:authorize="isAuthenticated()" th:text="|${#authentication.name}님 환영합니다|"></span>
+        <a sec:authorize="isAuthenticated()" th:href="@{/member/modify}">회원정보수정</a>
+        <a sec:authorize="isAuthenticated()" th:href="@{/member/modifyPassword}">비밀번호수정</a>
         <a sec:authorize="isAuthenticated()" th:href="@{/member/logout}">로그아웃</a>
         <a sec:authorize="isAnonymous()" th:href="@{/member/login}">로그인</a>
         <a sec:authorize="isAnonymous()" th:href="@{/member/join}">회원가입</a>
