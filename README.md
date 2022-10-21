@@ -43,13 +43,13 @@
 
 `태그: 제목` 형식으로 작성한다.
 
-`Feat` : 새로운 기능 추가 <br> 
-`Fix` : 버그 수정 <br>
-`Docs` : 문서 수정 <br>
-`Style` : 코드 포맷팅, 세미콜론 누락, 코드 변경이 없는 경우 <br>
-`Refactor` : 코드 리펙토링 <br>
-`Test` : 테스트 코드, 리펙토링 테스트 코드 추가 <br>
-`Chore` : 빌드 업무 수정, 패키지 매니저 수정 <br>
+- `Feat` : 새로운 기능 추가
+- `Fix` : 버그 수정
+- `Docs` : 문서 수정
+- `Style` : 코드 포맷팅, 세미콜론 누락, 코드 변경이 없는 경우
+- `Refactor` : 코드 리펙토링
+- `Test` : 테스트 코드, 리펙토링 테스트 코드 추가
+- `Chore` : 빌드 업무 수정, 패키지 매니저 수정
 
 #### 😗 Git Emoji
 - [Gitmoji 사용법 정리](https://inpa.tistory.com/m/entry/GIT-%E2%9A%A1%EF%B8%8F-Gitmoji-%EC%82%AC%EC%9A%A9%EB%B2%95-Gitmoji-cli)
@@ -77,8 +77,8 @@
 #### 2. git-flow 전략을 사용해서 브랜치를 관리
 [`우아한 형제들 - git-flow 전략 정리글`](https://techblog.woowahan.com/2553/)
 
-`master` : 제품으로 출시될 수 있는 브랜치 <br>
-`develop` : 다음 출시 버전을 개발하는 브랜치 <br>
-`feature` : 기능을 개발하는 브랜치 <br>
-`release` : 이번 출시 버전을 준비하는 브랜치 <br>
-`hotfix` : 출시 버전에서 발생한 버그를 수정 하는 브랜치 <br>
+- `master` : 제품으로 출시될 수 있는 브랜치
+- `develop` : 다음 출시 버전을 개발하는 브랜치
+- `feature` : 기능을 개발하는 브랜치
+- `release` : 이번 출시 버전을 준비하는 브랜치
+- `hotfix` : 출시 버전에서 발생한 버그를 수정 하는 브랜치
