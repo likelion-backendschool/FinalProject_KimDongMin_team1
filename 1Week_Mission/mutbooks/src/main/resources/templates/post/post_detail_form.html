@@ -49,7 +49,7 @@
 
         <div style="text-align: right;" th:if="${#authentication.principal.username == post.member.username}">
             <button type="button" class="btn btn-outline-dark">수정</button>
-            <button type="button" class="btn btn-outline-dark">삭제</button>
+            <button type="button" class="btn btn-outline-dark delete-btn" th:onclick="deletePost()" th:value="${post.id}">삭제</button>
         </div>
         <div class="text-center">
             <button type="button" class="btn btn-outline-dark" onclick="history.back();">목록으로</button>

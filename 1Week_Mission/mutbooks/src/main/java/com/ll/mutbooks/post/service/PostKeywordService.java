@@ -15,4 +15,8 @@ public class PostKeywordService {
     public PostKeyword save(PostKeyword postKeyword) {
         return postKeywordRepository.save(postKeyword);
     }
+
+    public void deletePostKeyword(Long id) {
+        postKeywordRepository.deleteById(id);
+    }
 }

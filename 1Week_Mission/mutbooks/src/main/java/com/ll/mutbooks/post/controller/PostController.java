@@ -80,4 +80,17 @@ public class PostController {
         model.addAttribute("post", post);
         return "post/post_detail_form";
     }
+
+    @GetMapping("/{id}/delete")
+    public String postDelete(@PathVariable("id") Long postId) {
+        PostHashTag postHashTag = postHashTagService.findAllByPostId(postId);
+        Long postHashTagId = postHashTag.getId();
+        Long postKeywordId = postHashTag.getPostKeyword().getId();
+
+        postHashTagService.deletePostHashTag(postHashTagId);
+        postKeywordService.deletePostKeyword(postKeywordId);
+        postService.postDelete(postId);
+
+        return "redirect:/post/list";
+    }
 }

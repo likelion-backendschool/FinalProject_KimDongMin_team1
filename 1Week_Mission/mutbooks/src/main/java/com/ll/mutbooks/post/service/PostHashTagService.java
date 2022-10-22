@@ -19,4 +19,8 @@ public class PostHashTagService {
     public PostHashTag findAllByPostId(Long postId) {
         return postHashTagRepository.findAllByPostId(postId).orElse(null);
     }
+
+    public void deletePostHashTag(Long id) {
+        postHashTagRepository.deleteById(id);
+    }
 }
