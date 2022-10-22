@@ -36,7 +36,6 @@
         <span sec:authorize="isAuthenticated()" th:text="|${#authentication.name}님 환영합니다|"></span>
         <a sec:authorize="isAuthenticated()" th:href="@{/post/list}">게시판</a>
         <a sec:authorize="isAuthenticated()" th:href="@{/member/modify}">회원정보수정</a>
-        <a sec:authorize="isAuthenticated()" th:href="@{/member/modifyPassword}">비밀번호수정</a>
         <a sec:authorize="isAuthenticated()" th:href="@{/member/logout}">로그아웃</a>
         <a sec:authorize="isAnonymous()" th:href="@{/member/login}">로그인</a>
         <a sec:authorize="isAnonymous()" th:href="@{/member/join}">회원가입</a>
@@ -44,7 +43,7 @@
 </header>
 
 <main class="flex-grow-1">
-    <section layout:fragment="content" class="container">
+    <section layout:fragment="content" class="container w-75">
         <div>내용</div>
     </section>
 </main>
