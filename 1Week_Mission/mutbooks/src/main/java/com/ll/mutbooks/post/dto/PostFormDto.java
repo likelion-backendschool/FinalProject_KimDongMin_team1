@@ -8,7 +8,7 @@ import javax.validation.constraints.NotEmpty;
 @AllArgsConstructor
 @Getter @Setter
 @Builder
-public class PostWriteFormDto {
+public class PostFormDto {
 
     @NotEmpty(message = "제목은 필수 입력 값입니다.")
     private String subject;

@@ -15,4 +15,8 @@ public class PostHashTagService {
     public PostHashTag save(PostHashTag postHashTag) {
         return postHashTagRepository.save(postHashTag);
     }
+
+    public PostHashTag findAllByPostId(Long postId) {
+        return postHashTagRepository.findAllByPostId(postId).orElse(null);
+    }
 }

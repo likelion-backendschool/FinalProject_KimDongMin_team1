@@ -20,7 +20,7 @@
     <tbody>
       <tr th:each="post : ${posts}">
         <td th:text="${post.id}"></td>
-        <td><a th:href="@{#}" th:text="${post.subject}"></a></td>
+        <td><a th:href="@{/post/{id} (id=${post.id})}" th:text="${post.subject}"></a></td>
         <td th:text="${post.member.username}"></td>
         <td th:text="${#temporals.format(post.createDate, 'yyyy-MM-dd')}"></td>
         <td th:text="${#temporals.format(post.updateDate, 'yyyy-MM-dd')}"></td>

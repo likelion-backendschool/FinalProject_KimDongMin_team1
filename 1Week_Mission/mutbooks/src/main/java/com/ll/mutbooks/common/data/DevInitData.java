@@ -31,14 +31,14 @@ public class DevInitData {
 
             postService.save(Post.builder()
                     .subject("T1 vs RNG 스코어 예측")
-                    .content("# 티원이 3:0으로 이김")
-                    .contentHTML("<h1>티원이 3:0으로 이김<h1>")
+                    .content("### 티원이 3:0으로 이김")
+                    .contentHTML("<h3>티원이 3:0으로 이김<h3>")
                     .member(member1).build());
 
             postService.save(Post.builder()
                     .subject("GEN vs DK 스코어 예측")
-                    .content("# 담원이 3:2로 이김")
-                    .contentHTML("<h1>담원이 3:2으로 이김<h1>")
+                    .content("### 담원이 3:2로 이김")
+                    .contentHTML("<h3>담원이 3:2으로 이김<h3>")
                     .member(member2).build());
 
         };

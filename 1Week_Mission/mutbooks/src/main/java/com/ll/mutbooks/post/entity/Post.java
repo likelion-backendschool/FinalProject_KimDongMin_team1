@@ -2,7 +2,7 @@ package com.ll.mutbooks.post.entity;
 
 import com.ll.mutbooks.common.entity.BaseEntity;
 import com.ll.mutbooks.member.entity.Member;
-import com.ll.mutbooks.post.dto.PostWriteFormDto;
+import com.ll.mutbooks.post.dto.PostFormDto;
 import lombok.*;
 
 import javax.persistence.*;
@@ -23,21 +23,21 @@ public class Post extends BaseEntity {
     @Column(name = "post_subject")
     private String subject;
 
-    @Column(name = "post_content")
+    @Column(name = "post_content", columnDefinition = "LONGTEXT")
     private String content;
 
-    @Column(name = "post_content_html")
+    @Column(name = "post_content_html", columnDefinition = "LONGTEXT")
     private String contentHTML;
 
     @ManyToOne
     @JoinColumn(name = "member_id")
     private Member member;
 
-    public static Post createPost(PostWriteFormDto postWriteFormDto, Member member) {
+    public static Post createPost(PostFormDto postFormDto, Member member) {
         return Post.builder()
-                .subject(postWriteFormDto.getSubject())
-                .content(postWriteFormDto.getContent())
-                .contentHTML(postWriteFormDto.getContentHTML())
+                .subject(postFormDto.getSubject())
+                .content(postFormDto.getContent())
+                .contentHTML(postFormDto.getContentHTML())
                 .member(member)
                 .build();
     }

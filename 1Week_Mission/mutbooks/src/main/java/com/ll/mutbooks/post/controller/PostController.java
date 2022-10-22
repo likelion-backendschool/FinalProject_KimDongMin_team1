@@ -2,29 +2,33 @@ package com.ll.mutbooks.post.controller;
 
 import com.ll.mutbooks.member.entity.Member;
 import com.ll.mutbooks.member.service.MemberService;
-import com.ll.mutbooks.post.dto.PostWriteFormDto;
+import com.ll.mutbooks.post.dto.PostDetailFormDto;
+import com.ll.mutbooks.post.dto.PostFormDto;
 import com.ll.mutbooks.post.entity.Post;
 import com.ll.mutbooks.post.entity.PostHashTag;
 import com.ll.mutbooks.post.entity.PostKeyword;
+import com.ll.mutbooks.post.repository.PostHashTagRepository;
+import com.ll.mutbooks.post.repository.PostKeywordRepository;
 import com.ll.mutbooks.post.service.PostHashTagService;
 import com.ll.mutbooks.post.service.PostKeywordService;
 import com.ll.mutbooks.post.service.PostService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.naming.Binding;
 import javax.validation.Valid;
 import java.security.Principal;
-import java.util.Arrays;
 
 @Controller
 @RequestMapping("/post")
 @RequiredArgsConstructor
+@Slf4j
 public class PostController {
 
     private final PostService postService;
@@ -40,21 +44,21 @@ public class PostController {
     }
 
     @GetMapping("/write")
-    public String writeForm(PostWriteFormDto postWriteFormDto) {
-        return "post/write_form";
+    public String postWriteForm(PostFormDto postFormDto) {
+        return "post/post_write_form";
     }
 
     @PostMapping("/write")
-    public String write(Principal principal, @Valid PostWriteFormDto postWriteFormDto, BindingResult result) {
+    public String postWrite(Principal principal, @Valid PostFormDto postFormDto, BindingResult result) {
         if (result.hasErrors()) {
-            return "post/write_form";
+            return "post/post_write_form";
         }
 
         Member member = memberService.findByUsername(principal.getName());
-        Post post = Post.createPost(postWriteFormDto, member);
+        Post post = Post.createPost(postFormDto, member);
         postService.save(post);
 
-        String keywords = postWriteFormDto.getKeywords();
+        String keywords = postFormDto.getKeywords();
         PostKeyword postKeyword = PostKeyword.createPostKeyword(keywords);
         postKeywordService.save(postKeyword);
 
@@ -62,5 +66,18 @@ public class PostController {
         postHashTagService.save(postHashTag);
 
         return "redirect:/post/list";
+    }
+
+    @GetMapping("/{id}")
+    public String postDetailForm(@PathVariable("id") Long postId, Model model) {
+        Post post = postService.findById(postId);
+        PostHashTag postHashTag = postHashTagService.findAllByPostId(post.getId());
+
+        if (postHashTag != null) {
+            String tags = postHashTag.getPostKeyword().getContent();
+            model.addAttribute("tags", tags);
+        }
+        model.addAttribute("post", post);
+        return "post/post_detail_form";
     }
 }
