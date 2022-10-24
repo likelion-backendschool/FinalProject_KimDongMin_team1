@@ -15,6 +15,8 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
 
     Optional<Member> findByUsername(String username);
 
+    Optional<Member> findByUsernameAndEmail(String username, String email);
+
     @Modifying
     @Query("update Member m set m.password = :password where m.username = :username")
     int modifyPassword(@Param("username") String username, @Param("password") String password);

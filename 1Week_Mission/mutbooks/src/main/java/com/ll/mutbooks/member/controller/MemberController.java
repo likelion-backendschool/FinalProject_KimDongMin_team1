@@ -18,6 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.mail.MessagingException;
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/member")
@@ -125,8 +126,41 @@ public class MemberController {
         return "redirect:/member/findUsername/success";
     }
 
+    @GetMapping("/findPassword")
+    public String memberPasswordFindForm(MemberFindPwdFormDto memberFindPwdFormDto) {
+        return "member/find_password_form";
+    }
+
+    @PostMapping("/findPassword")
+    public String memberPasswordFind(
+            @Valid MemberFindPwdFormDto memberFindPwdFormDto,
+            BindingResult result, RedirectAttributes redirectAttributes) throws MessagingException {
+
+        if (result.hasErrors()) {
+            return "member/find_password_form";
+        }
+
+        Member member = memberService.findByUsernameAndEmail(memberFindPwdFormDto.getUsername(), memberFindPwdFormDto.getEmail());
+        String temporaryPwd = UUID.randomUUID().toString().replaceAll("-", "");
+
+        if (member != null) {
+            memberService.changePassword(member, passwordEncoder.encode(temporaryPwd));
+            mailService.sendMail2(member.getEmail(), temporaryPwd);
+        }
+
+        redirectAttributes.addAttribute("password", member != null ? temporaryPwd : null);
+
+        return "redirect:/member/findPassword/success";
+    }
+
+
     @GetMapping("/findUsername/success")
-    public String success() {
+    public String successFindUsername() {
         return "member/find_username";
+    }
+
+    @GetMapping("/findPassword/success")
+    public String successFindPassword() {
+        return "member/find_password";
     }
 }

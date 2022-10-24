@@ -33,4 +33,15 @@ public class MailService {
         mimeMessageHelper.setText("<h1>회원 가입을 축하합니다!!</h1>", true);
         javaMailSender.send(message);
     }
+
+    public void sendMail2(String receiver, String temporaryPwd) throws MessagingException {
+        MimeMessage message = javaMailSender.createMimeMessage();
+        message.setSubject("[MUTBOOKS] 임시 비밀번호 발송");
+
+        MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(message, false, "UTF-8");
+        mimeMessageHelper.setFrom(sender);
+        mimeMessageHelper.setTo(receiver);
+        mimeMessageHelper.setText("<h3>%s</h3>".formatted(temporaryPwd), true);
+        javaMailSender.send(message);
+    }
 }

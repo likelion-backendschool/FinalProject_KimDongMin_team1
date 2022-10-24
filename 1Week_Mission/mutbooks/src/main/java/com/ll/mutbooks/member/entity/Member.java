@@ -49,6 +49,10 @@ public class Member extends BaseEntity {
         this.nickname = memberModifyFormDto.getNickname();
     }
 
+    public void changePassword(String temporary) {
+        this.password = temporary;
+    }
+
     public static Member createMember(MemberJoinFormDto memberFormDto, PasswordEncoder passwordEncoder) {
         return Member.builder()
                 .username(memberFormDto.getUsername())
