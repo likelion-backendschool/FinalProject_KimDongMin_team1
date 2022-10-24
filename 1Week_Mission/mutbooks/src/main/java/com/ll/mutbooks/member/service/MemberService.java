@@ -21,6 +21,14 @@ public class MemberService {
         return memberRepository.findByUsername(username).orElse(null);
     }
 
+    public Member findByEmail(String email) {
+        return memberRepository.findByEmail(email);
+    }
+
+    public Member findByUsernameAndEmail(String username, String email) {
+        return memberRepository.findByUsernameAndEmail(username, email).orElse(null);
+    }
+
     @Transactional
     public int modifyPassword(String username, String newPassword) {
         return memberRepository.modifyPassword(username, newPassword);
@@ -32,5 +40,11 @@ public class MemberService {
         if(findMember != null) {
             throw new IllegalStateException("이미 존재하는 회원입니다!");
         }
+    }
+
+    @Transactional
+    public void changePassword(Member member, String temporaryPwd) {
+        Member findMember = memberRepository.findById(member.getId()).orElse(null);
+        findMember.changePassword(temporaryPwd);
     }
 }

@@ -18,9 +18,9 @@ public class DevInitData {
     public CommandLineRunner initData(MemberService memberService, PostService postService, PasswordEncoder passwordEncoder) {
         return args -> {
             Member member1 = memberService.joinMember(Member.builder()
-                    .username("T1 Faker")
+                    .username("zoe")
                     .password(passwordEncoder.encode("1234"))
-                    .email("t1_faker@naver.com")
+                    .email("ddmkim94@naver.com")
                     .authLevel(MemberRole.USER).build());
 
             Member member2 = memberService.joinMember(Member.builder()
