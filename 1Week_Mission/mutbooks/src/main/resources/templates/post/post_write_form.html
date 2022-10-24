@@ -6,10 +6,14 @@
   <title>글 작성</title>
   <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
   <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
-  <script defer th:src="@{/js/write_form.js}"></script>
+  <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+  <script src="https://uicdn.toast.com/editor-plugin-code-syntax-highlight/latest/toastui-editor-plugin-code-syntax-highlight-all.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css"/>
+  <link rel="stylesheet" href="https://uicdn.toast.com/editor-plugin-code-syntax-highlight/latest/toastui-editor-plugin-code-syntax-highlight.min.css"/>
+  <script defer th:src="@{/js/post/post_write_form.js}"></script>
 </head>
 <section layout:fragment="content" style="margin: 0 auto;">
-  <form action="/post/write" role="form" method="post" th:object="${postWriteFormDto}">
+  <form action="/post/write" role="form" method="post" th:object="${postFormDto}">
     <div class="form-group py-2">
       <label th:for="subject">제목</label>
       <input type="text" th:field="*{subject}" class="form-control" placeholder="제목을 입력해주세요.">
@@ -28,5 +32,6 @@
       <button type="button" class="btn btn-outline-dark" onclick="history.back();">취소</button>
       <button type="submit" class="btn btn-outline-dark write-btn">작성</button>
     </div>
+  </form>
 </section>
 </html>

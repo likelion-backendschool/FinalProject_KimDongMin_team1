@@ -4,8 +4,10 @@ const markdownInput = document.querySelector('.markdown');
 const htmlInput = document.querySelector('.html');
 const submitBtn = document.querySelector('.write-btn');
 
-const editor = new toastui.Editor({
+const Editor = toastui.Editor;
+const editor = new Editor({
     el: document.querySelector('#editor'),
+    plugins: [Editor.plugin.codeSyntaxHighlight],
     previewStyle: 'vertical',
     height: '500px',
 });

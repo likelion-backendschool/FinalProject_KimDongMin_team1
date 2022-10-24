@@ -1,5 +1,6 @@
 <html lang="ko"
       xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layout/layout.html}">
 <head>
@@ -28,5 +29,9 @@
       <button type="submit" class="btn btn-outline-dark">수정</button>
     </div>
   </form>
+
+  <div style="text-align: right;">
+    <a sec:authorize="isAuthenticated()" th:href="@{/member/modifyPassword}">비밀번호수정</a>
+  </div>
 </section>
 </html>

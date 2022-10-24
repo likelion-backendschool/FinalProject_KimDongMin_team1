@@ -15,4 +15,12 @@ public class PostKeywordService {
     public PostKeyword save(PostKeyword postKeyword) {
         return postKeywordRepository.save(postKeyword);
     }
+
+    public PostKeyword findPostKeyword(Long id) {
+        return postKeywordRepository.findById(id).orElse(null);
+    }
+
+    public void deletePostKeyword(Long id) {
+        postKeywordRepository.deleteById(id);
+    }
 }
