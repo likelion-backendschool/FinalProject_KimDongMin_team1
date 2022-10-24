@@ -1,0 +1,37 @@
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout.html}">
+<head>
+  <title>글 수정</title>
+  <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor.min.css" />
+  <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+  <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+  <script src="https://uicdn.toast.com/editor-plugin-code-syntax-highlight/latest/toastui-editor-plugin-code-syntax-highlight-all.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css"/>
+  <link rel="stylesheet" href="https://uicdn.toast.com/editor-plugin-code-syntax-highlight/latest/toastui-editor-plugin-code-syntax-highlight.min.css"/>
+  <script defer th:src="@{/js/post/post_update_form.js}"></script>
+</head>
+<section layout:fragment="content" style="margin: 0 auto;">
+  <form th:action="@{/post/{id}/modify (id=${postId})}" role="form" method="post" th:object="${postUpdateFormDto}">
+    <div class="form-group py-2">
+      <label th:for="subject">제목</label>
+      <input type="text" th:field="*{subject}" class="form-control" placeholder="제목을 입력해주세요.">
+      <p th:if="${#fields.hasErrors('subject')}" th:errors="*{subject}" class="fieldError">Incorrect data</p>
+    </div>
+    <div class="form-group py-2">
+      <input type="hidden" th:field="*{content}" class="markdown">
+      <input type="hidden" th:field="*{contentHTML}" class="html">
+      <div id="editor"></div>
+    </div>
+    <div class="form-group py-2">
+      <label th:for="keywords">해시태그</label>
+      <input type="text" th:field="*{keywords}" class="form-control" placeholder="해시태그를 입력해주세요.">
+    </div>
+    <div style="text-align: right" class="py-3">
+      <button type="button" class="btn btn-outline-dark" onclick="history.back();">취소</button>
+      <button type="submit" class="btn btn-outline-dark write-btn">수정</button>
+    </div>
+  </form>
+</section>
+</html>

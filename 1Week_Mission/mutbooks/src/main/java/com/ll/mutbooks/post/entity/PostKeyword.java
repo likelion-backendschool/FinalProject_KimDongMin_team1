@@ -26,4 +26,8 @@ public class PostKeyword extends BaseEntity {
                 .content(keywords)
                 .build();
     }
+
+    public void changeKeyword(String keywords) {
+        this.content = keywords;
+    }
 }
