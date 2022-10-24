@@ -1,11 +1,8 @@
 package com.ll.mutbooks.member.controller;
 
 import com.ll.mutbooks.common.service.MailService;
-import com.ll.mutbooks.member.dto.MemberLoginFormDto;
-import com.ll.mutbooks.member.dto.MemberModifyFormDto;
-import com.ll.mutbooks.member.dto.MemberModifyPwdDto;
+import com.ll.mutbooks.member.dto.*;
 import com.ll.mutbooks.member.entity.Member;
-import com.ll.mutbooks.member.dto.MemberJoinFormDto;
 import com.ll.mutbooks.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.mail.MessagingException;
 import javax.validation.Valid;
@@ -105,5 +103,30 @@ public class MemberController {
         }
 
         return "redirect:/";
+    }
+
+    @GetMapping("/findUsername")
+    public String memberUsernameFindForm(MemberFindFormDto memberFindFormDto) {
+        return "member/find_username_form";
+    }
+
+    @PostMapping("/findUsername")
+    public String memberUsernameFind(
+            @Valid MemberFindFormDto memberFindFormDto,
+            BindingResult result, RedirectAttributes redirectAttributes) {
+
+        if (result.hasErrors()) {
+            return "/member/find_username_form";
+        }
+
+        Member member = memberService.findByEmail(memberFindFormDto.getEmail());
+        redirectAttributes.addAttribute("username", member != null ? member.getUsername() : null);
+
+        return "redirect:/member/findUsername/success";
+    }
+
+    @GetMapping("/findUsername/success")
+    public String success() {
+        return "member/find_username";
     }
 }

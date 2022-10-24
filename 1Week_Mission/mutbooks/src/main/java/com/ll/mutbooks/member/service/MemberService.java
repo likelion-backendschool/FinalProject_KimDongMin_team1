@@ -21,6 +21,10 @@ public class MemberService {
         return memberRepository.findByUsername(username).orElse(null);
     }
 
+    public Member findByEmail(String email) {
+        return memberRepository.findByEmail(email);
+    }
+
     @Transactional
     public int modifyPassword(String username, String newPassword) {
         return memberRepository.modifyPassword(username, newPassword);

@@ -23,7 +23,11 @@
             <input type="password" th:field="*{password}" class="form-control" placeholder="비밀번호를 입력해주세요.">
             <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="fieldError">Incorrect data</p>
         </div>
-        <div style="text-align: right" class="py-3">
+        <div style="text-align: right;">
+            <a th:href="@{/member/findUsername}">아이디 찾기</a>
+            <a th:href="@{#}">비밀번호 찾기</a>
+        </div>
+        <div style="text-align: right" class="py-1">
             <button type="button" class="btn btn-outline-dark" onclick="history.back();">취소</button>
             <button type="submit" class="btn btn-outline-dark">로그인</button>
         </div>
