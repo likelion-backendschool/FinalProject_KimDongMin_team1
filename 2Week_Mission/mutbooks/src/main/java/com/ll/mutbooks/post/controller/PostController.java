@@ -144,7 +144,8 @@ public class PostController {
 
         postHashTagService.deletePostHashTag(postHashTagId);
         postKeywordService.deletePostKeyword(postKeywordId);
-        postService.postDelete(postId);
+        Post post = postService.findById(postId);
+        postService.postDelete(post);
 
         return "redirect:/post/list";
     }

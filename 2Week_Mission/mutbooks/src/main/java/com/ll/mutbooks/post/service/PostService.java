@@ -27,7 +27,7 @@ public class PostService {
         return postRepository.findById(postId).orElse(null);
     }
 
-    public void postDelete(Long postId) {
-        postRepository.deleteById(postId);
+    public void postDelete(Post post) {
+        postRepository.delete(post);
     }
 }
