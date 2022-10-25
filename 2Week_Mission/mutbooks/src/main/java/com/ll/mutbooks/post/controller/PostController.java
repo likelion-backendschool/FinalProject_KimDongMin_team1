@@ -138,7 +138,14 @@ public class PostController {
 
     @GetMapping("/{id}/delete")
     public String postDelete(@PathVariable("id") Long postId) {
-        postService.postDelete(postId);
+        PostHashTag postHashTag = postHashTagService.findAllByPostId(postId);
+        Long postHashTagId = postHashTag.getId();
+        Long postKeywordId = postHashTag.getPostKeyword().getId();
+
+        postHashTagService.deletePostHashTag(postHashTagId);
+        postKeywordService.deletePostKeyword(postKeywordId);
+        Post post = postService.findById(postId);
+        postService.postDelete(post);
 
         return "redirect:/post/list";
     }

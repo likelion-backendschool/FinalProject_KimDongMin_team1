@@ -11,6 +11,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Entity
 @Getter @Setter
 @SuperBuilder
+@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class PostKeyword extends BaseEntity {
 

@@ -14,6 +14,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Entity
 @Getter @Setter
 @SuperBuilder
+@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class PostHashTag extends BaseEntity {
 
@@ -24,7 +25,6 @@ public class PostHashTag extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "post_id")
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private Post post;
 
     @ManyToOne
