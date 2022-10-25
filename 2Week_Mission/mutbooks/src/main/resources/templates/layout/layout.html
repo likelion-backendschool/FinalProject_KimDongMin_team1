@@ -35,6 +35,8 @@
     <div class="container" style="text-align: right;">
         <span sec:authorize="isAuthenticated()" th:text="|${#authentication.name}님 환영합니다|"></span>
         <a sec:authorize="isAuthenticated()" th:href="@{/post/list}">게시판</a>
+        <a sec:authorize="isAuthenticated()" th:href="@{/product/create}">도서등록</a>
+        <a sec:authorize="isAuthenticated()" th:href="@{/product/list}">도서목록</a>
         <a sec:authorize="isAuthenticated()" th:href="@{/member/modify}">회원정보수정</a>
         <a sec:authorize="isAuthenticated()" th:href="@{/member/logout}">로그아웃</a>
         <a sec:authorize="isAnonymous()" th:href="@{/member/login}">로그인</a>
