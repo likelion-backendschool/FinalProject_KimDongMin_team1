@@ -45,6 +45,9 @@ public class Member extends BaseEntity {
     }
 
     public void change(MemberModifyFormDto memberModifyFormDto) {
+        if (!memberModifyFormDto.getNickname().equals("")) {
+            this.authLevel = MemberRole.AUTHOR;
+        }
         this.email = memberModifyFormDto.getEmail();
         this.nickname = memberModifyFormDto.getNickname();
     }
@@ -54,12 +57,14 @@ public class Member extends BaseEntity {
     }
 
     public static Member createMember(MemberJoinFormDto memberFormDto, PasswordEncoder passwordEncoder) {
+        MemberRole memberRole = memberFormDto.getNickname().equals("") ? MemberRole.USER : MemberRole.AUTHOR;
+
         return Member.builder()
                 .username(memberFormDto.getUsername())
                 .password(passwordEncoder.encode(memberFormDto.getPassword()))
                 .nickname(memberFormDto.getNickname())
                 .email(memberFormDto.getEmail())
-                .authLevel(MemberRole.USER)
+                .authLevel(memberRole)
                 .build();
     }
 

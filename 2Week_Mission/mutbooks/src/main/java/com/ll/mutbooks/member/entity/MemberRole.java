@@ -4,7 +4,7 @@ import lombok.Getter;
 
 @Getter
 public enum MemberRole {
-    USER("USER"), ADMIN("ADMIN");
+    USER("USER"), AUTHOR("AUTHOR"), ADMIN("ADMIN");
 
     MemberRole(String level) {
         this.level = level;

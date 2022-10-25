@@ -34,17 +34,17 @@ public class MemberService {
         return memberRepository.modifyPassword(username, newPassword);
     }
 
+    @Transactional
+    public void changePassword(Member member, String temporaryPwd) {
+        Member findMember = memberRepository.findById(member.getId()).orElse(null);
+        findMember.changePassword(temporaryPwd);
+    }
+
     // 중복 회원 검사
     private void validateDuplicateMember(Member member) {
         Member findMember = memberRepository.findByEmail(member.getEmail());
         if(findMember != null) {
             throw new IllegalStateException("이미 존재하는 회원입니다!");
         }
-    }
-
-    @Transactional
-    public void changePassword(Member member, String temporaryPwd) {
-        Member findMember = memberRepository.findById(member.getId()).orElse(null);
-        findMember.changePassword(temporaryPwd);
     }
 }
