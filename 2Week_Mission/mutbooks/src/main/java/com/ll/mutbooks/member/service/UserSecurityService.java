@@ -32,7 +32,11 @@ public class UserSecurityService implements UserDetailsService {
         if ("admin".equals(username)) {
             authorities.add(new SimpleGrantedAuthority(MemberRole.ADMIN.getLevel()));
         } else {
-            authorities.add(new SimpleGrantedAuthority(MemberRole.USER.getLevel()));
+            if (member.getNickname() == null) {
+                authorities.add(new SimpleGrantedAuthority(MemberRole.USER.getLevel()));
+            } else {
+                authorities.add(new SimpleGrantedAuthority(MemberRole.AUTHOR.getLevel()));
+            }
         }
 
         return new User(member.getUsername(), member.getPassword(), authorities);
