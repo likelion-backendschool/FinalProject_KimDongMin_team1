@@ -4,6 +4,7 @@ import com.ll.mutbooks.common.entity.BaseEntity;
 import com.ll.mutbooks.member.dto.MemberJoinFormDto;
 import com.ll.mutbooks.member.dto.MemberModifyFormDto;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.persistence.*;
@@ -12,7 +13,9 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Getter @Setter
-@NoArgsConstructor
+@SuperBuilder
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Member extends BaseEntity {
 
     @Id @GeneratedValue(strategy = IDENTITY)

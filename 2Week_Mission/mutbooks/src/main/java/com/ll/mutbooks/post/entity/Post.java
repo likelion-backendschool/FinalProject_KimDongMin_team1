@@ -4,6 +4,7 @@ import com.ll.mutbooks.common.entity.BaseEntity;
 import com.ll.mutbooks.member.entity.Member;
 import com.ll.mutbooks.post.dto.PostFormDto;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 
@@ -11,9 +12,8 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Getter @Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@SuperBuilder
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Post extends BaseEntity {
 
     @Id @GeneratedValue(strategy = IDENTITY)
