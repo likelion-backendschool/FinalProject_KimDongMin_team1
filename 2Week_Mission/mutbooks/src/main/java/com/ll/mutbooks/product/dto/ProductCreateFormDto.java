@@ -8,7 +8,6 @@ import lombok.*;
 @Builder
 public class ProductCreateFormDto {
 
-    private String keyword;
     private String subject;
     private Integer price;
     private String productTagContents;
