@@ -2,6 +2,7 @@ package com.ll.mutbooks.post.entity;
 
 import com.ll.mutbooks.common.entity.BaseEntity;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 
@@ -9,9 +10,9 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Getter @Setter
-@NoArgsConstructor
+@SuperBuilder
 @AllArgsConstructor
-@Builder
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class PostKeyword extends BaseEntity {
 
     @Id @GeneratedValue(strategy = IDENTITY)

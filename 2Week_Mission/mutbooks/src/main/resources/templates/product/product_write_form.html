@@ -1,0 +1,39 @@
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout.html}">
+<head>
+  <title>도서 등록</title>
+</head>
+<section layout:fragment="content" class="w-50" style="margin: 0 auto;">
+  <form th:action method="post" th:object="${form}">
+    <div class="form-group py-2">
+      <label th:for="subject">글 태그 선택</label>
+      <select class="form-select form-select-sm" name="postKeywordId">
+        <option disabled="disabled" selected>- 글 태그 선택 -</option>
+        <option th:each="postKeyword : ${postKeywords}"
+                th:value="${postKeyword}"
+                th:text="${postKeyword}"></option>
+      </select>
+    </div>
+    <div class="form-group py-2">
+      <label th:for="subject">제목</label>
+      <input type="text" th:field="*{subject}" class="form-control" placeholder="제목을 입력해주세요.">
+      <p th:if="${#fields.hasErrors('subject')}" th:errors="*{subject}" class="fieldError">Incorrect data</p>
+    </div>
+    <div class="form-group py-2">
+      <label th:for="price">가격</label>
+      <input type="text" th:field="*{price}" class="form-control" placeholder="가격을 입력해주세요.">
+      <p th:if="${#fields.hasErrors('subject')}" th:errors="*{subject}" class="fieldError">Incorrect data</p>
+    </div>
+    <div class="form-group py-2">
+      <label th:for="productTagContents">해시태그</label>
+      <input type="text" th:field="*{productTagContents}" class="form-control" placeholder="#태그1 #태그2 #태그3 ...">
+    </div>
+    <div style="text-align: right" class="py-3">
+      <button type="button" class="btn btn-outline-dark" onclick="history.back();">취소</button>
+      <button type="submit" class="btn btn-outline-dark write-btn">작성</button>
+    </div>
+  </form>
+</section>
+</html>
