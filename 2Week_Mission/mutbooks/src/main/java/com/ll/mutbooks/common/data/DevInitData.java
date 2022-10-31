@@ -4,6 +4,10 @@ import com.ll.mutbooks.member.entity.Member;
 import com.ll.mutbooks.member.entity.MemberRole;
 import com.ll.mutbooks.member.service.MemberService;
 import com.ll.mutbooks.post.entity.Post;
+import com.ll.mutbooks.post.entity.PostHashTag;
+import com.ll.mutbooks.post.entity.PostKeyword;
+import com.ll.mutbooks.post.service.PostHashTagService;
+import com.ll.mutbooks.post.service.PostKeywordService;
 import com.ll.mutbooks.post.service.PostService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
@@ -15,31 +19,55 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Profile("dev")
 public class DevInitData {
     @Bean
-    public CommandLineRunner initData(MemberService memberService, PostService postService, PasswordEncoder passwordEncoder) {
+    public CommandLineRunner initData(MemberService memberService,
+                                      PostService postService,
+                                      PostHashTagService postHashTagService,
+                                      PostKeywordService postKeywordService,
+                                      PasswordEncoder passwordEncoder) {
         return args -> {
             Member member1 = memberService.joinMember(Member.builder()
-                    .username("zoe")
+                    .username("user1")
                     .password(passwordEncoder.encode("1234"))
                     .email("ddmkim94@naver.com")
                     .authLevel(MemberRole.USER).build());
 
             Member member2 = memberService.joinMember(Member.builder()
-                    .username("DK Nuguri")
+                    .username("admin")
                     .password(passwordEncoder.encode("1234"))
-                    .email("dk_nuguri@naver.com")
+                    .email("admin@naver.com")
                     .authLevel(MemberRole.ADMIN).build());
 
-            postService.save(Post.builder()
-                    .subject("T1 vs RNG 스코어 예측")
-                    .content("### 티원이 3:0으로 이김")
-                    .contentHTML("<h3>티원이 3:0으로 이김<h3>")
+            Post post1 = postService.save(Post.builder()
+                    .subject("1주차 리팩토링 목록")
+                    .content("### 메일 발송 비동기 방식으로 변경")
+                    .contentHTML("<h3>메일 발송 비동기 방식으로 변경<h3>")
                     .member(member1).build());
 
-            postService.save(Post.builder()
-                    .subject("GEN vs DK 스코어 예측")
-                    .content("### 담원이 3:2로 이김")
-                    .contentHTML("<h3>담원이 3:2으로 이김<h3>")
+            Post post2 = postService.save(Post.builder()
+                    .subject("2주차 구현 목록")
+                    .content("### 상품 결제 기능 구현")
+                    .contentHTML("<h3>상품 결제 기능 구현<h3>")
                     .member(member2).build());
+
+            PostKeyword keyword1 = postKeywordService.save(PostKeyword.builder()
+                    .content("#1주차 #멋사")
+                    .build());
+
+            PostKeyword keyword2 = postKeywordService.save(PostKeyword.builder()
+                    .content("#2주차 #멋사")
+                    .build());
+
+            PostHashTag tag1 = postHashTagService.save(PostHashTag.builder()
+                    .post(post1)
+                    .member(member1)
+                    .postKeyword(keyword1)
+                    .build());
+
+            PostHashTag tag2 = postHashTagService.save(PostHashTag.builder()
+                    .post(post2)
+                    .member(member2)
+                    .postKeyword(keyword2)
+                    .build());
 
         };
     }

@@ -38,15 +38,6 @@ public class Member extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private MemberRole authLevel;
 
-    @Builder
-    public Member(String username, String password, String nickname, String email, MemberRole authLevel) {
-        this.username = username;
-        this.password = password;
-        this.nickname = nickname;
-        this.email = email;
-        this.authLevel = authLevel;
-    }
-
     public void change(MemberModifyFormDto memberModifyFormDto) {
         if (!memberModifyFormDto.getNickname().equals("")) {
             this.authLevel = MemberRole.AUTHOR;
