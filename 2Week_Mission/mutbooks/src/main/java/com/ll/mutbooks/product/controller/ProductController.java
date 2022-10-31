@@ -1,4 +1,4 @@
-package com.ll.mutbooks.product;
+package com.ll.mutbooks.product.controller;
 
 import com.ll.mutbooks.member.entity.Member;
 import com.ll.mutbooks.member.service.MemberService;
@@ -70,7 +70,18 @@ public class ProductController {
 
         productService.save(product);
 
-        return "redirect:/product/list";
+        return "redirect:/product/" + product.getId();
+    }
+
+    @GetMapping("/{id}")
+    public String productDetailForm(@PathVariable("id") Long productId, Model model) {
+        Product product = productService.findById(productId);
+        // 게시글 리스트
+        List<Post> posts = productService.findPostsByProduct(product);
+
+        model.addAttribute("product", product);
+
+        return "product/product_detail_form";
     }
 
 

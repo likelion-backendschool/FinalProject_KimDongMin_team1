@@ -10,5 +10,6 @@ public class ProductCreateFormDto {
 
     private String subject;
     private Integer price;
+    private String postKeyword;
     private String productTagContents;
 }
