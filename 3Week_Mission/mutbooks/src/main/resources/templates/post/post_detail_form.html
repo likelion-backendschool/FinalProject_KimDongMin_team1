@@ -1,0 +1,59 @@
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout.html}">
+<head>
+    <title>상세 페이지</title>
+    <link rel="stylesheet" href="https://uicdn.toast.com/editor/latest/toastui-editor-viewer.min.css" />
+    <script src="https://uicdn.toast.com/editor/latest/toastui-editor-viewer.js"></script>
+    <script src="https://uicdn.toast.com/editor/latest/toastui-editor-all.min.js"></script>
+    <script src="https://uicdn.toast.com/editor-plugin-code-syntax-highlight/latest/toastui-editor-plugin-code-syntax-highlight-all.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.23.0/themes/prism.min.css"/>
+    <link rel="stylesheet" href="https://uicdn.toast.com/editor-plugin-code-syntax-highlight/latest/toastui-editor-plugin-code-syntax-highlight.min.css"/>
+    <script defer th:src="@{/js/post/post_detail_form.js}"></script>
+    <style>
+        #viewer {
+            border: 1px solid black;
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        .toastui-editor-contents h3 {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <section layout:fragment="content">
+        <div class="py-2">
+            <span th:text="|제목: ${post.subject}|"></span>
+        </div>
+        <div class="py-2">
+            <span th:text="|작성자: ${post.member.username}|"></span>
+        </div>
+        <div>
+            <input type="hidden" id="content" th:value="${post.content}">
+            <span>내용</span>
+            <div id="viewer"></div>
+        </div>
+        <div class="py-2">
+            <span th:text="|작성일: ${#temporals.format(post.createDate, 'yyyy-MM-dd')}|"></span>
+        </div>
+        <div class="py-2">
+            <span th:text="|수정일: ${#temporals.format(post.updateDate, 'yyyy-MM-dd')}|"></span>
+        </div>
+        <div class="py-2">
+            <span th:text="|해시태그: ${tags == null ? '태그 없음' : tags}|"></span>
+        </div>
+
+        <div style="text-align: right;" th:if="${#authentication.principal.username == post.member.username}">
+            <button type="button" class="btn btn-outline-dark" th:onclick="|location.href='@{/post/{id}/modify (id = ${post.id})}'|">수정</button>
+            <button type="button" class="btn btn-outline-dark delete-btn" th:onclick="deletePost()" th:value="${post.id}">삭제</button>
+        </div>
+        <div class="text-center">
+            <button type="button" class="btn btn-outline-dark" onclick="history.back();">목록으로</button>
+        </div>
+    </section>
+</body>
+</html>

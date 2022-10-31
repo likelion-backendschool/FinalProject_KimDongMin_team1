@@ -1,0 +1,35 @@
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/layout.html}">
+<head>
+  <title>글 목록</title>
+</head>
+<section layout:fragment="content" style="margin: 0 auto;">
+  <table class="table table-hover text-center">
+    <thead class="table-primary">
+      <tr>
+        <th>#</th>
+        <th>제목</th>
+        <th>작성자</th>
+        <th>작성일</th>
+        <th>수정일</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="post : ${posts}">
+        <td th:text="${post.id}"></td>
+        <td><a th:href="@{/post/{id} (id=${post.id})}" th:text="${post.subject}"></a></td>
+        <td th:text="${post.member.username}"></td>
+        <td th:text="${#temporals.format(post.createDate, 'yyyy-MM-dd')}"></td>
+        <td th:text="${#temporals.format(post.updateDate, 'yyyy-MM-dd')}"></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="btns d-flex justify-content-end">
+    <button class="btn btn-primary text-center" sec:authorize="isAuthenticated()" th:onclick="|location.href='@{/post/write}'|">글쓰기</button>
+  </div>
+</section>
+</html>
